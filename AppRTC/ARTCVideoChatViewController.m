@@ -18,6 +18,9 @@
     [super viewDidLoad];
     
     self.isZoom = NO;
+    self.isAudioMute = NO;
+    self.isVideoMute = NO;
+    
     [self.audioButton.layer setCornerRadius:20.0f];
     [self.videoButton.layer setCornerRadius:20.0f];
     [self.hangupButton.layer setCornerRadius:20.0f];
@@ -39,15 +42,10 @@
     //Getting Orientation change
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orientationChanged:)
-                                                 name:@"UIDeviceOrientationDidChangeNotification"
+                                                 name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    //
-    //
-    //    //AVCaptureSessionRuntimeErrorNotification
-    //    [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                             selector:@selector(didChangeVideoSizes)
-    //                                                 name:AVCaptureSessionRuntimeErrorNotification
-    //                                               object:nil];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,7 +71,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     [self disconnect];
 }
 
@@ -139,23 +137,38 @@
 }
 
 - (IBAction)audioButtonPressed:(id)sender {
-    //TODO: Implement Audio Toggle
+    //TODO: this change not work on simulator (it will crash)
+    UIButton *audioButton = sender;
+    if (self.isAudioMute) {
+        [self.client unmuteAudioIn];
+        [audioButton setImage:[UIImage imageNamed:@"audioOn"] forState:UIControlStateNormal];
+        self.isAudioMute = NO;
+    } else {
+        [self.client muteAudioIn];
+        [audioButton setImage:[UIImage imageNamed:@"audioOff"] forState:UIControlStateNormal];
+        self.isAudioMute = YES;
+    }
 }
 
 - (IBAction)videoButtonPressed:(id)sender {
-    //TODO: Implement Video Toggle
+    UIButton *videoButton = sender;
+    if (self.isVideoMute) {
+//        [self.client unmuteVideoIn];
+        [self.client swapCameraToFront];
+        [videoButton setImage:[UIImage imageNamed:@"videoOn"] forState:UIControlStateNormal];
+        self.isVideoMute = NO;
+    } else {
+        [self.client swapCameraToBack];
+        //[self.client muteVideoIn];
+        //[videoButton setImage:[UIImage imageNamed:@"videoOff"] forState:UIControlStateNormal];
+        self.isVideoMute = YES;
+    }
 }
 
 - (IBAction)hangupButtonPressed:(id)sender {
     //Clean up
     [self disconnect];
     [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
--(void)didChangeVideoSizes
-{
-    [self videoView:self.localView didChangeVideoSize:self.localVideoSize];
-    [self videoView:self.remoteView didChangeVideoSize:self.remoteVideoSize];
 }
 
 
@@ -188,10 +201,7 @@
 
 - (void)appClient:(ARDAppClient *)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
     self.remoteVideoTrack = remoteVideoTrack;
-    //    [self.remoteView setFrame:CGRectMake(0, 0, 100, 100)];
-    //    RTCI420Frame* fram  = [RTCI420Frame new];
     
-    //    [self.remoteView renderFrame:fram];
     [self.remoteVideoTrack addRenderer:self.remoteView];
     
     [UIView animateWithDuration:0.4f animations:^{
@@ -202,15 +212,6 @@
         [self.footerViewBottomConstraint setConstant:-80.0f];
         [self.view layoutIfNeeded];
     }];
-}
-
--(void)didRemoveLocalVideoTrack:(RTCVideoTrack *)remoteVideoTrack
-{
-    if (self.localVideoTrack == remoteVideoTrack) {
-        [remoteVideoTrack removeRenderer:self.localView];
-        self.localVideoTrack = remoteVideoTrack = nil;
-        [self.localView renderFrame:nil];
-    }
 }
 
 - (void)appClient:(ARDAppClient *)client didError:(NSError *)error {
@@ -226,9 +227,8 @@
 #pragma mark - RTCEAGLVideoViewDelegate
 
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-        //    [UIView animateWithDuration:0.4f animations:^{
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    [UIView animateWithDuration:0.4f animations:^{
         CGFloat containerWidth = self.view.frame.size.width;
         CGFloat containerHeight = self.view.frame.size.height;
         CGSize defaultAspectRatio = CGSizeMake(4, 3);
@@ -272,7 +272,9 @@
             [self.remoteViewLeftConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
             [self.remoteViewRightConstraint setConstant:containerWidth/2.0f - videoFrame.size.width/2.0f]; //center
         }
-    });
+        [self.view layoutIfNeeded];
+    }];
+
 }
 
 
