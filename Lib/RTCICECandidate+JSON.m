@@ -43,6 +43,16 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
   return [[RTCICECandidate alloc] initWithMid:mid index:mLineIndex sdp:sdp];
 }
 
+//DSSB
++ (RTCICECandidate *)candidateFromJSONDictionaryDSSB:(NSDictionary *)dictionary
+{
+    NSString *mid = dictionary[@"sdpMid"];
+    NSString *sdp = dictionary[@"candidate"];
+    NSNumber *num = dictionary[@"sdpMLineIndex"];
+    NSInteger mLineIndex = [num integerValue];
+    return [[RTCICECandidate alloc] initWithMid:mid index:mLineIndex sdp:sdp];
+}
+
 - (NSData *)JSONData {
   NSDictionary *json = @{
     kRTCICECandidateTypeKey : kRTCICECandidateTypeValue,
