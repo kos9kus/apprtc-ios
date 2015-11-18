@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ef0b5b8-e0de-49e2-a512-4c0338d0ea88" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lib/ARDAppClient.h" afterPath="$PROJECT_DIR$/Lib/ARDAppClient.h" />
     </list>
     <ignored path="apprtc-ios.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,10 +121,10 @@
       <file leaf-file-name="ARDAppClient.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lib/ARDAppClient.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42696628">
-              <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.49438202">
+              <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
               <folding>
-                <element signature="e#1463#1496#0" expanded="true" />
+                <element signature="e#1461#1494#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -585,7 +584,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="83" column="8" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
           <folding>
-            <element signature="e#1463#1496#0" expanded="true" />
+            <element signature="e#1461#1494#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -790,10 +789,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lib/ARDAppClient.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42696628">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.49438202">
+          <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
           <folding>
-            <element signature="e#1463#1496#0" expanded="true" />
+            <element signature="e#1461#1494#0" expanded="true" />
           </folding>
         </state>
       </provider>
