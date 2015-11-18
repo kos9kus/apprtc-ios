@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AppRTC/RTCEAGLVideoView.h>
+#import <libjingle_peerconnection/RTCEAGLVideoView.h>
 #import <AppRTC/ARDAppClient.h>
 
 @interface ARTCVideoChatViewController : UIViewController <ARDAppClientDelegate, RTCEAGLVideoViewDelegate>
@@ -42,6 +42,10 @@
 @property (assign, nonatomic) CGSize localVideoSize;
 @property (assign, nonatomic) CGSize remoteVideoSize;
 @property (assign, nonatomic) BOOL isZoom; //used for double tap remote view
+
+//togle button parameter
+@property (assign, nonatomic) BOOL isAudioMute;
+@property (assign, nonatomic) BOOL isVideoMute;
 
 - (IBAction)audioButtonPressed:(id)sender;
 - (IBAction)videoButtonPressed:(id)sender;

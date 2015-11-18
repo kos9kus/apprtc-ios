@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+<<<<<<< HEAD
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5C80AA751AAB5DF300F21FFA"
+               BuildableName = "AppRTC.app"
+               BlueprintName = "AppRTC"
+               ReferencedContainer = "container:../AppRTC.xcodeproj">
+=======
+               BuildableIdentifier = 'primary'
+               BlueprintIdentifier = 'C87D0851BA029AC5972A3840'
+               BlueprintName = 'AppRTC'
+               ReferencedContainer = 'container:Pods.xcodeproj'
+               BuildableName = 'libAppRTC.a'>
+>>>>>>> ISBX/master
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "5C80AA751AAB5DF300F21FFA"
+            BuildableName = "AppRTC.app"
+            BlueprintName = "AppRTC"
+            ReferencedContainer = "container:../AppRTC.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+</Scheme>
